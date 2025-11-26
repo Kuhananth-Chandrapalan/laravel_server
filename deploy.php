@@ -21,6 +21,7 @@ add('shared_files', [
 add('shared_dirs', [
     'storage',
     'bootstrap/cache',
+    'database',  // Share database directory so SQLite database persists across deployments
 ]);
 
 // Writable dirs by web server
@@ -96,6 +97,37 @@ task('deploy:writable', function () {
 
     writeln('✅ Writable directories permissions set');
 })->desc('Set writable directories permissions');
+
+// Custom task: Set permissions on shared directories
+task('deploy:shared_permissions', function () {
+    $sharedPath = get('deploy_path') . '/shared';
+
+    // Set permissions on shared storage and bootstrap/cache directories
+    // These need to be writable by the web server (test user)
+    run("chmod -R 775 $sharedPath/storage 2>/dev/null || true");
+    run("chmod -R 775 $sharedPath/bootstrap 2>/dev/null || true");
+    run("chmod -R 775 $sharedPath/database 2>/dev/null || true");
+
+    // Ensure storage subdirectories exist and have correct permissions
+    run("mkdir -p $sharedPath/storage/framework/cache 2>/dev/null || true");
+    run("mkdir -p $sharedPath/storage/framework/sessions 2>/dev/null || true");
+    run("mkdir -p $sharedPath/storage/framework/views 2>/dev/null || true");
+    run("mkdir -p $sharedPath/storage/logs 2>/dev/null || true");
+    run("chmod -R 775 $sharedPath/storage/framework 2>/dev/null || true");
+    run("chmod -R 775 $sharedPath/storage/logs 2>/dev/null || true");
+
+    // Ensure database directory exists and create SQLite database if it doesn't exist
+    run("mkdir -p $sharedPath/database 2>/dev/null || true");
+    $dbFile = "$sharedPath/database/database.sqlite";
+    if (!test("[ -f $dbFile ]")) {
+        run("touch $dbFile 2>/dev/null || true");
+        run("chmod 664 $dbFile 2>/dev/null || true");
+    } else {
+        run("chmod 664 $dbFile 2>/dev/null || true");
+    }
+
+    writeln('✅ Shared directories permissions set');
+})->desc('Set shared directories permissions');
 
 // Custom task: Set permissions (without sudo - requires proper group setup)
 task('deploy:permissions', function () {
@@ -246,6 +278,7 @@ task('deploy', [
     'deploy:env',           // Setup .env file (before vendors)
     'deploy:vendors',       // Install Composer dependencies
     'deploy:generate_key',  // Generate APP_KEY (after vendors, before other artisan commands)
+    'deploy:shared_permissions', // Set permissions on shared directories
     'deploy:permissions',
     'artisan:storage:link',
     'artisan:view:cache',
