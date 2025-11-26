@@ -15,8 +15,8 @@
         body {
             font-family: 'Inter', sans-serif;
             line-height: 1.6;
-            color: #333;
-            background: #f8f9fa;
+            color: #e5e7eb;
+            background: #000000;
         }
         .container {
             max-width: 1200px;
@@ -24,8 +24,9 @@
             padding: 0 20px;
         }
         header {
-            background: #fff;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            background: #111111;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            border-bottom: 1px solid #333333;
             position: sticky;
             top: 0;
             z-index: 100;
@@ -39,7 +40,7 @@
         .logo {
             font-size: 1.5rem;
             font-weight: 700;
-            color: #14b8a6;
+            color: #ffffff;
             text-decoration: none;
         }
         .nav-links {
@@ -49,12 +50,12 @@
         }
         .nav-links a {
             text-decoration: none;
-            color: #333;
+            color: #e5e7eb;
             font-weight: 500;
             transition: color 0.3s;
         }
         .nav-links a:hover {
-            color: #14b8a6;
+            color: #ffffff;
         }
         main {
             min-height: calc(100vh - 200px);
@@ -70,29 +71,33 @@
         .btn {
             display: inline-block;
             padding: 0.75rem 1.5rem;
-            background: #14b8a6;
-            color: #fff;
+            background: #ffffff;
+            color: #000000;
             text-decoration: none;
             border-radius: 0.5rem;
             font-weight: 500;
-            transition: background 0.3s;
+            transition: background 0.3s, color 0.3s;
         }
         .btn:hover {
-            background: #0d9488;
+            background: #e5e7eb;
+            color: #000000;
         }
         .btn-secondary {
-            background: #6b7280;
+            background: #333333;
+            color: #ffffff;
         }
         .btn-secondary:hover {
-            background: #4b5563;
+            background: #4a4a4a;
+            color: #ffffff;
         }
         .hero {
             text-align: center;
             padding: 4rem 0;
-            background: linear-gradient(135deg, #14b8a6 0%, #0d9488 50%, #0f766e 100%);
+            background: linear-gradient(135deg, #1a1a1a 0%, #000000 100%);
             color: #fff;
             border-radius: 1rem;
             margin-bottom: 3rem;
+            border: 1px solid #333333;
         }
         .hero h1 {
             font-size: 3rem;
@@ -103,14 +108,20 @@
             margin-bottom: 2rem;
         }
         .content-section {
-            background: #fff;
+            background: #111111;
             padding: 2rem;
             border-radius: 0.5rem;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.5);
             margin-bottom: 2rem;
+            border: 1px solid #333333;
+            color: #e5e7eb;
         }
         .content-section h2 {
-            color: #14b8a6;
+            color: #ffffff;
+            margin-bottom: 1rem;
+        }
+        .content-section h1 {
+            color: #ffffff;
             margin-bottom: 1rem;
         }
         .grid {
@@ -120,18 +131,21 @@
             margin-top: 2rem;
         }
         .card {
-            background: #fff;
+            background: #111111;
             padding: 2rem;
             border-radius: 0.5rem;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+            border: 1px solid #333333;
+            color: #e5e7eb;
         }
         .card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+            box-shadow: 0 4px 8px rgba(255,255,255,0.1);
+            border-color: #555555;
         }
         .card h3 {
-            color: #14b8a6;
+            color: #ffffff;
             margin-bottom: 1rem;
         }
         form {
@@ -145,18 +159,33 @@
             display: block;
             margin-bottom: 0.5rem;
             font-weight: 500;
+            color: #e5e7eb;
         }
         .form-group input,
         .form-group textarea {
             width: 100%;
             padding: 0.75rem;
-            border: 1px solid #ddd;
+            border: 1px solid #333333;
             border-radius: 0.5rem;
             font-family: inherit;
+            background: #1a1a1a;
+            color: #e5e7eb;
+        }
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #555555;
+            background: #222222;
         }
         .form-group textarea {
             resize: vertical;
             min-height: 120px;
+        }
+        ul {
+            color: #e5e7eb;
+        }
+        p {
+            color: #e5e7eb;
         }
     </style>
 </head>

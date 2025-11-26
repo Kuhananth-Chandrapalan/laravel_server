@@ -2,7 +2,90 @@
 
 ## Quick Deployment Steps
 
-### Option 1: Automated (Recommended)
+### Option 0: PHP Deployer (Recommended - Zero-Downtime)
+
+PHP Deployer provides zero-downtime deployments with automatic rollback support. This is the recommended method for production deployments.
+
+**Prerequisites:**
+- PHP Deployer is already installed via Composer (`deployer/deployer`)
+- SSH access to the server configured
+- Git repository access
+
+**Deploy from your local machine:**
+```bash
+# Deploy to production
+vendor/bin/dep deploy production
+
+# Or if you have Deployer installed globally
+dep deploy production
+```
+
+**What happens during deployment:**
+1. Creates a new release directory
+2. Clones/pulls code from Git repository
+3. Installs Composer dependencies (production mode)
+4. Sets up environment file (if needed)
+5. Sets file permissions
+6. Runs database migrations
+7. Builds frontend assets (npm install & build)
+8. Caches Laravel configuration, routes, and views
+9. Creates symlink to new release (atomic switch)
+10. Keeps previous releases for easy rollback
+
+**Rollback to previous release:**
+```bash
+vendor/bin/dep rollback production
+```
+
+**Check deployment status:**
+```bash
+vendor/bin/dep releases production
+```
+
+**First-time setup on server (REQUIRED):**
+
+Before your first deployment, you need to set up the directory structure with proper permissions on the server. Run these commands ONCE via SSH:
+
+```bash
+# SSH into your server
+ssh bohar@192.168.1.110
+
+# Upload and run the setup script, or run these commands manually:
+# First, set permissions on the deployment directory itself (for symlink creation)
+sudo chown test:test /home/test/htdocs/test.serve
+sudo chmod 775 /home/test/htdocs/test.serve
+
+# Create Deployer directory structure
+sudo mkdir -p /home/test/htdocs/test.serve/.dep
+sudo mkdir -p /home/test/htdocs/test.serve/releases
+sudo mkdir -p /home/test/htdocs/test.serve/shared
+
+# Set permissions for .dep directory (bohar needs write access)
+sudo chown -R bohar:test /home/test/htdocs/test.serve/.dep
+sudo chmod -R 775 /home/test/htdocs/test.serve/.dep
+
+# Set permissions for releases and shared directories
+sudo chown -R test:test /home/test/htdocs/test.serve/releases
+sudo chown -R test:test /home/test/htdocs/test.serve/shared
+sudo chmod -R 775 /home/test/htdocs/test.serve/releases
+sudo chmod -R 775 /home/test/htdocs/test.serve/shared
+
+# Ensure bohar is in the test group (for group write access)
+sudo usermod -a -G test bohar
+```
+
+**Important:** After adding bohar to the test group, log out and log back in (or run `newgrp test`) for the group change to take effect.
+
+Alternatively, you can upload and run the `deploy-setup-server.sh` script:
+```bash
+# From local machine
+scp deploy-setup-server.sh bohar@192.168.1.110:/tmp/
+ssh bohar@192.168.1.110 "chmod +x /tmp/deploy-setup-server.sh && bash /tmp/deploy-setup-server.sh"
+```
+
+**Note:** The `.env` file is shared between releases, so you only need to configure it once in the `shared/` directory.
+
+### Option 1: Automated (Bash Scripts)
 
 **Step 1: Upload files to server**
 ```bash
@@ -114,10 +197,37 @@ ls -la /home/test/htdocs/test.serve/storage
 ls -la /home/test/htdocs/test.serve/bootstrap/cache
 ```
 
+## PHP Deployer Configuration
+
+The `deploy.php` file contains all deployment configuration. Key settings:
+
+- **Server**: `bohar@192.168.1.110`
+- **Deployment Path**: `/home/test/htdocs/test.serve`
+- **Repository**: `https://github.com/Kuhananth-Chandrapalan/laravel_server.git`
+- **Branch**: `main`
+- **Releases Kept**: 5 (previous releases for rollback)
+
+### Customizing Deployment
+
+Edit `deploy.php` to:
+- Change server connection details
+- Modify deployment tasks
+- Adjust shared files/directories
+- Change number of releases to keep
+
+### Deployment Tasks
+
+The deployment includes these custom tasks:
+- `deploy:env` - Setup environment file
+- `deploy:permissions` - Set file permissions
+- `deploy:build` - Build frontend assets
+- `deploy:migrate` - Run database migrations
+
 ## Post-Deployment
 
 1. Visit your domain: `http://test.serve`
 2. Verify all routes are working
 3. Check database connection (if using database)
 4. Monitor logs for any errors
+5. (PHP Deployer) Check release history: `vendor/bin/dep releases production`
 
