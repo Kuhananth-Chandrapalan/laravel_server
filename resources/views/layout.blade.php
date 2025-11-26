@@ -39,7 +39,7 @@
         .logo {
             font-size: 1.5rem;
             font-weight: 700;
-            color: #2563eb;
+            color: #14b8a6;
             text-decoration: none;
         }
         .nav-links {
@@ -54,7 +54,7 @@
             transition: color 0.3s;
         }
         .nav-links a:hover {
-            color: #2563eb;
+            color: #14b8a6;
         }
         main {
             min-height: calc(100vh - 200px);
@@ -70,7 +70,7 @@
         .btn {
             display: inline-block;
             padding: 0.75rem 1.5rem;
-            background: #2563eb;
+            background: #14b8a6;
             color: #fff;
             text-decoration: none;
             border-radius: 0.5rem;
@@ -78,7 +78,7 @@
             transition: background 0.3s;
         }
         .btn:hover {
-            background: #1d4ed8;
+            background: #0d9488;
         }
         .btn-secondary {
             background: #6b7280;
@@ -89,7 +89,7 @@
         .hero {
             text-align: center;
             padding: 4rem 0;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #14b8a6 0%, #0d9488 50%, #0f766e 100%);
             color: #fff;
             border-radius: 1rem;
             margin-bottom: 3rem;
@@ -110,7 +110,7 @@
             margin-bottom: 2rem;
         }
         .content-section h2 {
-            color: #2563eb;
+            color: #14b8a6;
             margin-bottom: 1rem;
         }
         .grid {
@@ -131,7 +131,7 @@
             box-shadow: 0 4px 8px rgba(0,0,0,0.15);
         }
         .card h3 {
-            color: #2563eb;
+            color: #14b8a6;
             margin-bottom: 1rem;
         }
         form {
