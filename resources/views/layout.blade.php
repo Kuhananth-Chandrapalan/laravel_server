@@ -26,7 +26,7 @@
         header {
             background: #111111;
             box-shadow: 0 2px 4px rgba(0,0,0,0.5);
-            border-bottom: 1px solid #333333;
+            border-bottom: 2px solid #dc2626;
             position: sticky;
             top: 0;
             z-index: 100;
@@ -40,7 +40,7 @@
         .logo {
             font-size: 1.5rem;
             font-weight: 700;
-            color: #ffffff;
+            color: #dc2626;
             text-decoration: none;
         }
         .nav-links {
@@ -55,49 +55,52 @@
             transition: color 0.3s;
         }
         .nav-links a:hover {
-            color: #ffffff;
+            color: #dc2626;
         }
         main {
             min-height: calc(100vh - 200px);
             padding: 3rem 0;
         }
         footer {
-            background: #1f2937;
+            background: #111111;
             color: #fff;
             text-align: center;
             padding: 2rem 0;
             margin-top: 4rem;
+            border-top: 2px solid #dc2626;
         }
         .btn {
             display: inline-block;
             padding: 0.75rem 1.5rem;
-            background: #ffffff;
-            color: #000000;
+            background: #dc2626;
+            color: #ffffff;
             text-decoration: none;
             border-radius: 0.5rem;
             font-weight: 500;
-            transition: background 0.3s, color 0.3s;
+            transition: background 0.3s, transform 0.3s;
         }
         .btn:hover {
-            background: #e5e7eb;
-            color: #000000;
+            background: #b91c1c;
+            transform: translateY(-2px);
         }
         .btn-secondary {
-            background: #333333;
-            color: #ffffff;
+            background: #1a1a1a;
+            color: #dc2626;
+            border: 2px solid #dc2626;
         }
         .btn-secondary:hover {
-            background: #4a4a4a;
+            background: #dc2626;
             color: #ffffff;
         }
         .hero {
             text-align: center;
             padding: 4rem 0;
-            background: linear-gradient(135deg, #1a1a1a 0%, #000000 100%);
+            background: linear-gradient(135deg, #000000 0%, #1a0000 50%, #000000 100%);
             color: #fff;
             border-radius: 1rem;
             margin-bottom: 3rem;
-            border: 1px solid #333333;
+            border: 2px solid #dc2626;
+            box-shadow: 0 0 20px rgba(220, 38, 38, 0.3);
         }
         .hero h1 {
             font-size: 3rem;
@@ -114,14 +117,15 @@
             box-shadow: 0 2px 4px rgba(0,0,0,0.5);
             margin-bottom: 2rem;
             border: 1px solid #333333;
+            border-left: 4px solid #dc2626;
             color: #e5e7eb;
         }
         .content-section h2 {
-            color: #ffffff;
+            color: #dc2626;
             margin-bottom: 1rem;
         }
         .content-section h1 {
-            color: #ffffff;
+            color: #dc2626;
             margin-bottom: 1rem;
         }
         .grid {
@@ -137,15 +141,16 @@
             box-shadow: 0 2px 4px rgba(0,0,0,0.5);
             transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
             border: 1px solid #333333;
+            border-top: 3px solid #dc2626;
             color: #e5e7eb;
         }
         .card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 4px 8px rgba(255,255,255,0.1);
-            border-color: #555555;
+            box-shadow: 0 4px 12px rgba(220, 38, 38, 0.4);
+            border-color: #dc2626;
         }
         .card h3 {
-            color: #ffffff;
+            color: #dc2626;
             margin-bottom: 1rem;
         }
         form {
@@ -174,8 +179,9 @@
         .form-group input:focus,
         .form-group textarea:focus {
             outline: none;
-            border-color: #555555;
-            background: #222222;
+            border-color: #dc2626;
+            background: #1a1a1a;
+            box-shadow: 0 0 0 2px rgba(220, 38, 38, 0.2);
         }
         .form-group textarea {
             resize: vertical;
